@@ -5,12 +5,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Pokemon</title>
 	</head>
-	<body></body>
+	<body>
+		<!-- JavaScript -->
+		<script>
+			function round_off(num) {
+				if (typeof num === "number") {
+					return parseFloat(num.toFixed(2));
+				}
+				return num; // Return non-numeric values as they are
+			}
+		</script>
 
-	<!-- JavaScript -->
-	<script type="module" src="index.js"></script>
-	<script src="pokemon/1-trainer.js"></script>
-	<script src="pokemon/2-pokemon.js"></script>
-	<script src="pokemon/3-pokemon_type.js"></script>
-	<script src="pokemon/4-pokemon_assignment.js"></script>
+		<script type="module" src="index.js"></script>
+		<script src="./pokemon/1-trainer.js"></script>
+		<script src="./pokemon/2-pokemon.js"></script>
+		<script src="./pokemon/3-pokemon_type.js"></script>
+		<script src="./pokemon/4-pokemon_assignment.js"></script>
+	</body>
 </html>

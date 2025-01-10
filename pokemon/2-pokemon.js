@@ -5,20 +5,27 @@ class Pokemon {
 		this.level = level;
 		this.hp = hp;
 		switch (type) {
+			case "Electric":
+			case "Fire":
+			case "Flying":
+			case "Normal":
+				this.damage = this.level * 2.3;
+				break;
 			case "Grass":
-				this.damage = this.level * 2;
+			case "Rock":
+				this.damage = this.level * 1.8;
 				break;
 			case "Water":
+			case "Ice":
+				this.damage = this.level * 2.1;
+				break;
+			case "Psychic":
+			case "Dragon":
 				this.damage = this.level * 2.5;
 				break;
-			case "Electric":
-				this.damage = this.level * 3;
-				break;
-			case "Fire":
-				this.damage = this.level * 3.5;
-				break;
 			default:
-				console.log("Unknown type");
+				console.log(`Unknown type: ${type}. Setting default damage.`);
+				this.damage = this.level * 1.6;
 				break;
 		}
 	}
@@ -27,7 +34,7 @@ class Pokemon {
 	attack(opponent) {
 		let chance = Math.random() * 100;
 		console.log(`${this.name} attacks ${opponent.name}`);
-		console.log(`${this.name} level up! Damage: ${this.damage}`);
+		console.log(`${this.name} level up! Damage: ${round_off(this.damage)}`);
 
 		if (chance < 10) {
 			console.log(`${this.name} landed a critical hit!`);
@@ -41,7 +48,9 @@ class Pokemon {
 	// Display what damage is received
 	received_damage(opponent) {
 		console.log(
-			`${this.name} attacks. ${opponent.name} received ${this.damage} damage.`
+			`${this.name} attacks. ${opponent.name} received ${round_off(
+				this.damage
+			)} damage.`
 		);
 	}
 
@@ -54,7 +63,7 @@ class Pokemon {
 			if (opponent.hp < 0) {
 				console.log(`${opponent.name} has 0 HP left.`);
 			} else {
-				console.log(`${opponent.name} has ${opponent.hp} HP left.`);
+				console.log(`${opponent.name} has ${round_off(opponent.hp)} HP left.`);
 			}
 		}
 	}
@@ -68,22 +77,34 @@ class Pokemon {
 			healer = this.level * 3;
 			this.hp += healer;
 			console.log(
-				`${this.name} received an ultra heal! Heals ${healer} HP. Thus, HP: ${this.hp} HP`
+				`${
+					this.name
+				} received an ultra heal! Heals ${healer} HP. Thus, HP: ${round_off(
+					this.hp
+				)} HP`
 			);
 		} else if (chance < 30) {
 			healer = this.level * 2;
 			this.hp += healer;
-			console.log(`${this.name} heals ${healer} HP. Thus, HP: ${this.hp} HP`);
+			console.log(
+				`${this.name} heals ${healer} HP. Thus, HP: ${round_off(this.hp)} HP`
+			);
 		}
 	}
 
 	// Increase damage and level up
 	power_up() {
-		let dummy = this.damage;
-		this.damage = this.damage + this.level * 0.5;
-		this.level++;
-		console.log(
-			`${this.name} level up! Level ${this.level}. Damage increased: ${dummy} -> ${this.damage}`
-		);
+		let dummy = this.damage,
+			chance = Math.random() * 100;
+
+		if (chance < 20) {
+			this.damage = this.damage + this.level * 0.5;
+			this.level++;
+			console.log(
+				`${this.name} level up! Level ${round_off(
+					this.level
+				)}. Damage increased: ${round_off(dummy)} -> ${round_off(this.damage)}`
+			);
+		}
 	}
 }
