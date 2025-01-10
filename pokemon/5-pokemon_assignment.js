@@ -58,19 +58,20 @@ do {
 	} else {
 		trainer_count = parseInt(trainer_count);
 
-		if (trainer_count < 2 || trainer_count > 5) {
-			console.log("Please enter a valid number between 2 and 5.");
+		// Check if the input is not a number or out of range
+		if (isNaN(trainer_count) || trainer_count < 2 || trainer_count > 5) {
+			alert("Please enter a valid number between 2 and 5.");
+			trainer_count = null; // Reset to ensure loop continues
 		}
 	}
 } while (
 	trainer_count === null ||
+	isNaN(trainer_count) ||
 	trainer_count < 2 ||
-	trainer_count > 5 ||
-	trainer_count === ""
+	trainer_count > 5
 );
 
-// prompt for pokemon count
-
+// Prompt for pokemon count
 do {
 	pokemon_count = prompt(
 		"Enter the number of Pokemons for each trainer (between 2 and 5):"
@@ -82,15 +83,17 @@ do {
 	} else {
 		pokemon_count = parseInt(pokemon_count);
 
-		if (pokemon_count < 2 || pokemon_count > 5) {
-			console.log("Please enter a valid number between 2 and 5.");
+		// Check if the input is not a number or out of range
+		if (isNaN(pokemon_count) || pokemon_count < 2 || pokemon_count > 5) {
+			alert("Please enter a valid number between 2 and 5.");
+			pokemon_count = null; // Reset to ensure loop continues
 		}
 	}
 } while (
-	pokemon_count < 2 ||
-	pokemon_count > 5 ||
 	pokemon_count === null ||
-	pokemon_count === ""
+	isNaN(pokemon_count) ||
+	pokemon_count < 2 ||
+	pokemon_count > 5
 );
 
 // assign pikachu to ash
