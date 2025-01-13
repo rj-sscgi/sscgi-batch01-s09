@@ -57,10 +57,13 @@ do {
 	if (trainer_count === null || trainer_count === "") {
 		alert("Input cannot be empty. Please enter a number between 2 and 5.");
 	} else {
-		trainer_count = parseInt(trainer_count);
-
 		// Check if the input is not a number or out of range
-		if (isNaN(trainer_count) || trainer_count < 2 || trainer_count > 5) {
+		if (
+			isNaN(trainer_count) ||
+			trainer_count.length !== 1 ||
+			trainer_count < 2 ||
+			trainer_count > 5
+		) {
 			alert("Please enter a valid number between 2 and 5.");
 			trainer_count = null; // Reset to ensure loop continues
 		}
@@ -72,22 +75,25 @@ do {
 	trainer_count > 5
 );
 
-// Prompt for pokemon count
+// prompt for pokemon count
 do {
 	pokemon_count = prompt(
 		"Enter the number of Pokemons for each trainer (between 2 and 5):"
 	);
 
-	// Check if user clicked Cancel or input is empty
+	// check if user clicked cancel or input is empty
 	if (pokemon_count === null || pokemon_count === "") {
 		alert("Input cannot be empty. Please enter a number between 2 and 5.");
 	} else {
-		pokemon_count = parseInt(pokemon_count);
-
-		// Check if the input is not a number or out of range
-		if (isNaN(pokemon_count) || pokemon_count < 2 || pokemon_count > 5) {
+		// check if the input is not a number or out of range
+		if (
+			isNaN(pokemon_count) ||
+			pokemon_count.length !== 1 ||
+			pokemon_count < 2 ||
+			pokemon_count > 5
+		) {
 			alert("Please enter a valid number between 2 and 5.");
-			pokemon_count = null; // Reset to ensure loop continues
+			pokemon_count = null; // reset to ensure loop continues
 		}
 	}
 } while (

@@ -14,56 +14,56 @@ class Trainer {
 	}
 	// return this.pokemon_list[index];
 	show_pokemon() {
-		console.log(`${this.name}'s Pokemon:`);
+		console.log(`Trainer ${this.name}'s Pokemon:`);
 		this.pokemon_list.forEach((pokemon, index) => {
-			// Set icon and color based on Pokemon type
+			// set icon and color based on pokemon type
 			let type_icon = "";
 			let type_color = "";
 
 			switch (pokemon.type.toLowerCase()) {
 				case "fire":
 					type_icon = "🔥";
-					type_color = "\x1b[31m"; // Red color
+					type_color = "\x1b[31m"; // red color
 					break;
 				case "water":
 					type_icon = "💧";
-					type_color = "\x1b[34m"; // Blue color
+					type_color = "\x1b[34m"; // blue color
 					break;
 				case "grass":
 					type_icon = "🌿";
-					type_color = "\x1b[32m"; // Green color
+					type_color = "\x1b[32m"; // green color
 					break;
 				case "electric":
 					type_icon = "⚡";
-					type_color = "\x1b[33m"; // Yellow color
+					type_color = "\x1b[33m"; // yellow color
 					break;
 				case "rock":
-					type_icon = "⛏️"; // Rock icon
-					type_color = "\x1b[90m"; // Gray color
+					type_icon = "⛏️";
+					type_color = "\x1b[90m"; // gray color
 					break;
 				case "psychic":
 					type_icon = "🧠";
-					type_color = "\x1b[35m"; // Magenta color
+					type_color = "\x1b[35m"; // magenta color
 					break;
 				case "ice":
 					type_icon = "❄️";
-					type_color = "\x1b[36m"; // Cyan color
+					type_color = "\x1b[36m"; // cyan color
 					break;
 				case "dragon":
 					type_icon = "🐉";
-					type_color = "\x1b[31;1m"; // Bright red color
+					type_color = "\x1b[31;1m"; // bright red color
 					break;
 				case "flying":
 					type_icon = "🕊️";
-					type_color = "\x1b[36;1m"; // Bright cyan color
+					type_color = "\x1b[36;1m"; // bight cyan color
 					break;
 				case "normal":
 					type_icon = "🌟";
-					type_color = "\x1b[33;1m"; // Bright yellow color
+					type_color = "\x1b[33;1m"; // bright yellow color
 					break;
 				default:
 					type_icon = "✨";
-					type_color = "\x1b[36m"; // Default cyan color for others
+					type_color = "\x1b[36m"; // default cyan color for others
 			}
 
 			console.log(
@@ -94,7 +94,7 @@ class Trainer {
 	}
 
 	summarize() {
-		console.log(`${this.name}'s Pokemon:`);
+		console.log(`Level ${this.trainer_level} - Trainer ${this.name}:`);
 		this.pokemon_list.forEach((pokemon, index) => {
 			// Ensure HP is not negative
 			const adjusted_hp = pokemon.hp < 0 ? 0 : pokemon.hp;
@@ -106,47 +106,47 @@ class Trainer {
 			switch (pokemon.type.toLowerCase()) {
 				case "fire":
 					type_icon = "🔥";
-					type_color = "\x1b[31m"; // Red color
+					type_color = "\x1b[31m"; // red color
 					break;
 				case "water":
 					type_icon = "💧";
-					type_color = "\x1b[34m"; // Blue color
+					type_color = "\x1b[34m"; // blue color
 					break;
 				case "grass":
 					type_icon = "🌿";
-					type_color = "\x1b[32m"; // Green color
+					type_color = "\x1b[32m"; // green color
 					break;
 				case "electric":
 					type_icon = "⚡";
-					type_color = "\x1b[33m"; // Yellow color
+					type_color = "\x1b[33m"; // yellow color
 					break;
 				case "rock":
 					type_icon = "⛏️";
-					type_color = "\x1b[90m"; // Gray color
+					type_color = "\x1b[90m"; // gray color
 					break;
 				case "psychic":
 					type_icon = "🧠";
-					type_color = "\x1b[35m"; // Magenta color
+					type_color = "\x1b[35m"; // magenta color
 					break;
 				case "ice":
 					type_icon = "❄️";
-					type_color = "\x1b[36m"; // Cyan color
+					type_color = "\x1b[36m"; // cyan color
 					break;
 				case "dragon":
 					type_icon = "🐉";
-					type_color = "\x1b[31;1m"; // Bright red color
+					type_color = "\x1b[31;1m"; // bright red color
 					break;
 				case "flying":
 					type_icon = "🕊️";
-					type_color = "\x1b[36;1m"; // Bright cyan color
+					type_color = "\x1b[36;1m"; // bright cyan color
 					break;
 				case "normal":
 					type_icon = "🌟";
-					type_color = "\x1b[33;1m"; // Bright yellow color
+					type_color = "\x1b[33;1m"; // bright yellow color
 					break;
 				default:
 					type_icon = "✨";
-					type_color = "\x1b[36m"; // Default cyan color for others
+					type_color = "\x1b[36m"; // default cyan color for others
 			}
 
 			console.log(

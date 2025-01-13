@@ -54,10 +54,8 @@ Trainer ${this.trainer1.name} releases ${pokemon1.name}! HP: ${round_off(
 				}! HP: ${round_off(pokemon2.hp)} 🟢`
 			);
 
-			let dummyhp1 = pokemon1.max_hp,
-				dummyhp2 = pokemon2.max_hp,
-				dummydamage1 = pokemon1.damage,
-				dummydamage2 = pokemon2.damage,
+			let dummydamage1 = pokemon1.damage, // default pokemon1 damage
+				dummydamage2 = pokemon2.damage, // default pokemon2 damage
 				round_counter = 1;
 
 			while (pokemon1.hp > 0 && pokemon2.hp > 0) {
@@ -77,7 +75,7 @@ Trainer ${this.trainer1.name} releases ${pokemon1.name}! HP: ${round_off(
 					console.log(`${pokemon2.name} HP: 0 ⚰️`);
 					console.log(`❌ ${pokemon2.name} has fainted!`);
 					console.log(`🏆 ${pokemon1.name} wins this round!`);
-					pokemon1.hp = dummyhp1; // resets pokemon1 hp after the round
+					pokemon1.hp = pokemon1.max_hp; // resets pokemon1 hp after the round
 					pokemon1.damage = dummydamage1; // resets pokemon1 damage after the round
 					trainer2_pokemon_index++; // move to next pokemon for trainer 2
 					break;
@@ -97,7 +95,7 @@ Trainer ${this.trainer1.name} releases ${pokemon1.name}! HP: ${round_off(
 					console.log(`${pokemon1.name} HP: 0 ⚰️`);
 					console.log(`❌ ${pokemon1.name} has fainted!`);
 					console.log(`🏆 ${pokemon2.name} wins this round!`);
-					pokemon2.hp = dummyhp2; // resets pokemon2 hp after the round
+					pokemon2.hp = pokemon2.max_hp; // resets pokemon2 hp after the round
 					pokemon2.damage = dummydamage2; // resets pokemon2 damage after the round
 					trainer1_pokemon_index++; // move to next pokemon for trainer 1
 					break;
@@ -105,33 +103,32 @@ Trainer ${this.trainer1.name} releases ${pokemon1.name}! HP: ${round_off(
 					console.log(`${pokemon1.name} HP: ${round_off(pokemon1.hp)} 🟡`);
 				}
 
-				round_counter++;
+				round_counter++; // increment the round every time the battle ends
 			}
 		}
 
+		// trainer's counter of how many battles fought
 		this.trainer1.battles_fought++;
 		this.trainer2.battles_fought++;
 
-		// Check for level-up
+		// check for level-up
 		if (
 			this.trainer1.battles_fought >= 2 &&
 			trainer1_pokemon_index < this.trainer1.pokemon_list.length
 		) {
-			this.trainer1.level_up();
+			this.trainer1.level_up(); // level up every 2 matches
 		}
 		if (
 			this.trainer2.battles_fought >= 2 &&
 			trainer2_pokemon_index < this.trainer2.pokemon_list.length
 		) {
-			this.trainer2.level_up();
+			this.trainer2.level_up(); // level up every 2 matches
 		}
 
 		// check if the battle ended with one trainer's pokemon fainting
 		if (trainer1_pokemon_index >= this.trainer1.pokemon_list.length) {
-			// console.log(`${this.trainer1.name} has been eliminated!`);
 			return this.trainer2; // trainer 2 wins
 		} else if (trainer2_pokemon_index >= this.trainer2.pokemon_list.length) {
-			// console.log(`${this.trainer2.name} has been eliminated!`);
 			return this.trainer1; // trainer 1 wins
 		}
 

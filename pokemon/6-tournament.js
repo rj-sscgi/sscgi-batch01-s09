@@ -1,6 +1,6 @@
 class Tournament {
 	constructor(players) {
-		this.players = players; // Array of trainers
+		this.players = players; // array of trainers
 	}
 
 	start_tournament() {
@@ -8,9 +8,8 @@ class Tournament {
 
 		const trainer_count = this.players.length;
 
-		// 2 trainers battle
+		// 2 trainers battle / single game battle
 		if (trainer_count === 2) {
-			// Single game battle
 			let results = {
 				[this.players[0].name]: 0,
 				[this.players[1].name]: 0,
@@ -48,10 +47,12 @@ class Tournament {
 
 		// 3 trainers battle
 		else if (trainer_count === 3) {
-			// Round-robin tournament
+			// round-robin tournament
 			console.log("⚔️ Round-Robin Tournament ⚔️");
 
 			const results = {};
+
+			//creates a key in the results object using trainer.name and sets the initial score = 0
 			this.players.forEach((trainer) => (results[trainer.name] = 0));
 
 			for (let i = 0; i < trainer_count; i++) {
@@ -63,25 +64,26 @@ class Tournament {
 					let winner = battle.start_battle();
 
 					if (!winner) {
-						console.error("🚨 Battle did not return a valid winner.");
+						console.error("🚨 Battle did not return a valid winner."); // error handling
 						return;
 					}
-					results[winner.name]++;
+					results[winner.name]++; // increments the score of the winning trainer
 				}
 			}
 
-			console.log("\n🏆 Tournament Results:");
-			for (const trainer in results) {
-				console.log(`Trainer ${trainer}: ${results[trainer]} wins`);
-			}
-
 			this.players.forEach((trainer) => {
+				// shows a summary using the summarize() function
 				console.log(`\nTrainer ${trainer.name}'s Pokemon after battle:`);
 				trainer.summarize();
 			});
 
-			console.log(" ");
+			console.log("\n🏆 Tournament Results:");
+			for (const trainer in results) {
+				// shows how many win a trainer have in the round robin after the battle
+				console.log(`Trainer ${trainer}: ${results[trainer]} wins`);
+			}
 
+			// compare the scores of the trainer and store it in champion
 			const champion = Object.keys(results).reduce((a, b) =>
 				results[a] > results[b] ? a : b
 			);
@@ -90,21 +92,21 @@ class Tournament {
 
 		// 4 trainers battle
 		else if (trainer_count === 4) {
-			// Double-elimination bracket
+			// double-elimination bracket
 			console.log("⚔️ Double Elimination Tournament ⚔️");
 
-			let winners_bracket = [...this.players]; // Initial players
+			let winners_bracket = [...this.players]; // initial players
 			let losers_bracket = [];
 			let eliminated_players = [];
-			let results = {}; // Initialize results to track wins
+			let results = {}; // initialize results to track wins
 
-			// Initialize losses and wins for all players
+			// initialize losses and wins for all players
 			this.players.forEach((player) => {
 				player.losses = 0;
-				results[player.name] = 0; // Initialize win count for each player
+				results[player.name] = 0; // initialize win count for each player
 			});
 
-			// Double-elimination phase
+			// double-elimination phase
 			while (winners_bracket.length > 1) {
 				console.log("\n🔥 Starting a new round of battles...");
 				const next_round_winners = [];
@@ -112,7 +114,7 @@ class Tournament {
 
 				for (let i = 0; i < winners_bracket.length; i += 2) {
 					if (i + 1 >= winners_bracket.length) {
-						// Odd number of players, auto-advance
+						// odd number of players, auto-advance
 						next_round_winners.push(winners_bracket[i]);
 						break;
 					}
@@ -124,10 +126,10 @@ class Tournament {
 							? winners_bracket[i + 1]
 							: winners_bracket[i];
 
-					// Increment the loser's losses
+					// increment the loser's losses
 					loser.losses++;
 
-					// If the player has lost twice, they are eliminated
+					// if the player has lost twice, they are eliminated
 					if (loser.losses === 2) {
 						eliminated_players.push(loser);
 						losers_bracket = losers_bracket.filter(
@@ -135,29 +137,30 @@ class Tournament {
 						);
 					}
 
-					// Move winners to the next round
+					// move winners to the next round
 					next_round_winners.push(winner);
 					next_round_losers.push(loser);
 
-					// Increment the winner's win count
+					// increment the winner's win count
 					results[winner.name]++;
 				}
 
-				// Move to the next round
+				// move to the next round
 				winners_bracket = next_round_winners;
 				losers_bracket = losers_bracket.concat(next_round_losers);
 
-				// Eliminate players from the losers bracket with 2 losses
+				// eliminate players from the losers bracket with 2 losses
 				if (losers_bracket.length > 2) {
 					const eliminated = losers_bracket.pop();
 					eliminated_players.push(eliminated);
 				}
 			}
 
-			// Final winner
+			// final winner
 			const champion = winners_bracket[0];
 			console.log("\n🏆 Tournament Results:");
 			this.players.forEach((trainer) => {
+				// shows a summary using the summarize() function
 				console.log(`\nTrainer ${trainer.name}'s Pokemon after battle:`);
 				trainer.summarize();
 			});
@@ -172,32 +175,33 @@ class Tournament {
 
 		// 5 trainers battle
 		else if (trainer_count === 5) {
-			// Double-elimination bracket
+			// double-elimination bracket
 			console.log("⚔️ Double Elimination Tournament ⚔️");
 
 			let winners_bracket = [...this.players]; // Initial players
 			let losers_bracket = [];
 			let eliminated_players = [];
 
-			// Initialize losses for all players
+			// initialize losses for all players
 			this.players.forEach((player) => {
 				player.losses = 0;
 			});
 
-			// Double-elimination phase
+			// double-elimination phase
 			while (winners_bracket.length > 3) {
-				// Run until we have 3 or fewer players in the winners bracket
+				// run until we have 3 or fewer players in the winners bracket
 				console.log("\n🔥 Starting a new round of battles...");
 				const next_round_winners = [];
 				const next_round_losers = [];
 
 				for (let i = 0; i < winners_bracket.length; i += 2) {
 					if (i + 1 >= winners_bracket.length) {
-						// Odd number of players, auto-advance
+						// odd number of players, auto-advance
 						next_round_winners.push(winners_bracket[i]);
 						break;
 					}
 
+					// winner's bracket battle
 					const battle = new Battle(winners_bracket[i], winners_bracket[i + 1]);
 					const winner = battle.start_battle();
 					const loser =
@@ -205,10 +209,10 @@ class Tournament {
 							? winners_bracket[i + 1]
 							: winners_bracket[i];
 
-					// Increment the loser's losses
+					// increment the loser's losses
 					loser.losses++;
 
-					// If the player has lost twice, they are eliminated
+					// if the player has lost twice, they are eliminated
 					if (loser.losses === 2) {
 						eliminated_players.push(loser);
 						losers_bracket = losers_bracket.filter(
@@ -216,23 +220,23 @@ class Tournament {
 						);
 					}
 
-					// Move winners to the next round
+					// move winners to the next round
 					next_round_winners.push(winner);
 					next_round_losers.push(loser);
 				}
 
-				// Move to the next round
+				// move to the next round
 				winners_bracket = next_round_winners;
 				losers_bracket = losers_bracket.concat(next_round_losers);
 
-				// Eliminate players from the losers bracket with 2 losses
+				// eliminate players from the losers bracket with 2 losses
 				if (losers_bracket.length > 2) {
 					const eliminated = losers_bracket.pop();
 					eliminated_players.push(eliminated);
 				}
 			}
 
-			// Transition to round-robin tournament if there are 3 or fewer players left
+			// transition to round-robin tournament if there are 3 or fewer players left
 			if (winners_bracket.length === 3) {
 				console.log("\n⚔️ Round-Robin Tournament for the Final Players ⚔️");
 
@@ -252,6 +256,7 @@ class Tournament {
 
 				console.log("\n🏆 Round-Robin Tournament Results:");
 				this.players.forEach((trainer) => {
+					// shows a summary using the summarize() function
 					console.log(`\nTrainer ${trainer.name}'s Pokemon after battle:`);
 					trainer.summarize();
 				});
@@ -270,7 +275,3 @@ class Tournament {
 		}
 	}
 }
-
-// Example usage
-// const tournament = new Tournament(trainers); // Adjust based on user input
-// tournament.start_tournament();
