@@ -33,14 +33,14 @@ class Pokemon {
 	// Attack
 	attack(opponent) {
 		let chance = Math.random() * 100;
-		console.log(`${this.name} attacks ${opponent.name}`);
-		console.log(`${this.name} level up! Damage: ${round_off(this.damage)}`);
+		console.log(`⚔️ ${this.name} attacks ${opponent.name}!`);
+		console.log(`🔥 Damage: ${round_off(this.damage)}`);
 
 		if (chance < 10) {
-			console.log(`${this.name} landed a critical hit!`);
+			console.log(`💥 Critical hit by ${this.name}!`);
 			this.damage *= 3; // critical hit triple damage
 		} else if (chance < 30) {
-			console.log(`${this.name} landed a double damage hit!`);
+			console.log(`💥 Double damage by ${this.name}!`);
 			this.damage *= 2; // double damage
 		}
 	}
@@ -48,23 +48,20 @@ class Pokemon {
 	// Display what damage is received
 	received_damage(opponent) {
 		console.log(
-			`${this.name} attacks. ${opponent.name} received ${round_off(
-				this.damage
-			)} damage.`
+			`💔 ${opponent.name} receives ${round_off(this.damage)} damage from ${
+				this.name
+			}.`
 		);
 	}
 
-	// Display how much HP left
+	// Display how much HP is left
 	calculate_damage(opponent) {
+		opponent.hp -= this.damage;
 		if (opponent.hp <= 0) {
-			console.log(`${opponent.name} has fainted!`);
+			console.log(`${opponent.name} has fainted! 💀`);
+			opponent.hp = 0;
 		} else {
-			opponent.hp -= this.damage;
-			if (opponent.hp < 0) {
-				console.log(`${opponent.name} has 0 HP left.`);
-			} else {
-				console.log(`${opponent.name} has ${round_off(opponent.hp)} HP left.`);
-			}
+			console.log(`💚 ${opponent.name} has ${round_off(opponent.hp)} HP left.`);
 		}
 	}
 
@@ -77,17 +74,17 @@ class Pokemon {
 			healer = this.level * 3;
 			this.hp += healer;
 			console.log(
-				`${
+				`✨ ${
 					this.name
-				} received an ultra heal! Heals ${healer} HP. Thus, HP: ${round_off(
+				} receives an ULTRA heal! Heals ${healer} HP. ❤️ HP: ${round_off(
 					this.hp
-				)} HP`
+				)}`
 			);
 		} else if (chance < 30) {
 			healer = this.level * 2;
 			this.hp += healer;
 			console.log(
-				`${this.name} heals ${healer} HP. Thus, HP: ${round_off(this.hp)} HP`
+				`❤️ ${this.name} heals ${healer} HP. HP: ${round_off(this.hp)}`
 			);
 		}
 	}
@@ -101,9 +98,11 @@ class Pokemon {
 			this.damage = this.damage + this.level * 0.5;
 			this.level++;
 			console.log(
-				`${this.name} level up! Level ${round_off(
+				`🔺 ${this.name} levels up to Level ${
 					this.level
-				)}. Damage increased: ${round_off(dummy)} -> ${round_off(this.damage)}`
+				}! 🔥 Damage increased: ${round_off(dummy)} -> ${round_off(
+					this.damage
+				)}`
 			);
 		}
 	}

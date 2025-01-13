@@ -4,7 +4,7 @@ class Tournament {
 	}
 
 	start_tournament() {
-		console.log("\n********* Pokémon Tournament *********\n");
+		console.log("\n********* 🏆 Pokémon Tournament 🏆 *********\n");
 
 		const trainer_count = this.players.length;
 
@@ -22,9 +22,9 @@ class Tournament {
 
 			if (winner) {
 				results[winner.name]++;
-				console.log(`${winner.name} wins the game!`);
+				console.log(`🏆 ${winner.name} wins the game!`);
 			} else {
-				console.log("The battle ended in a draw.");
+				console.log("🚫 The battle ended in a draw.");
 			}
 
 			console.log("\n🏆 Final Results:");
@@ -53,7 +53,7 @@ class Tournament {
 					let winner = battle.start_battle();
 
 					if (!winner) {
-						console.error("Battle did not return a valid winner.");
+						console.error("🚨 Battle did not return a valid winner.");
 						return;
 					}
 					results[winner.name]++;
@@ -65,7 +65,6 @@ class Tournament {
 				console.log(`Trainer ${trainer}: ${results[trainer]} wins`);
 			}
 
-			// determine the trainer with the most wins by comparing the results
 			const champion = Object.keys(results).reduce((a, b) =>
 				results[a] > results[b] ? a : b
 			);
