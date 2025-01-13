@@ -1,3 +1,4 @@
+// Battle Prompt
 do {
 	var input = prompt("Do you want to start the battle? [Y/N]");
 	if (input === "y" || input === "Y") {
@@ -30,6 +31,7 @@ do {
 	}
 } while (true);
 
+// Tournament Prompt
 do {
 	var restart = prompt("Do you want to start a new tournament? [Y/N]");
 
