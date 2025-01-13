@@ -103,17 +103,15 @@ class Battle {
 
 				round_counter++;
 			}
+		}
 
-			// check if the battle ended with one trainer's pokemon fainting
-			if (trainer1_pokemon_index >= this.trainer1.pokemon_list.length) {
-				console.log(`${this.trainer1.name} has been eliminated!`);
-				return this.trainer2; // trainer 2 wins
-			}
-
-			if (trainer2_pokemon_index >= this.trainer2.pokemon_list.length) {
-				console.log(`${this.trainer2.name} has been eliminated!`);
-				return this.trainer1; // trainer 1 wins
-			}
+		// check if the battle ended with one trainer's pokemon fainting
+		if (trainer1_pokemon_index >= this.trainer1.pokemon_list.length) {
+			// console.log(`${this.trainer1.name} has been eliminated!`);
+			return this.trainer2; // trainer 2 wins
+		} else if (trainer2_pokemon_index >= this.trainer2.pokemon_list.length) {
+			// console.log(`${this.trainer2.name} has been eliminated!`);
+			return this.trainer1; // trainer 1 wins
 		}
 
 		console.log("\n*************************************");

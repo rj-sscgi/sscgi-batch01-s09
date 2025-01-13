@@ -2,21 +2,19 @@ do {
 	var input = prompt("Do you want to start the battle? [Y/N]");
 	if (input === "y" || input === "Y") {
 		// Create a new Tournament with the trainers
-		if (input === "y" || input === "Y") {
-			function shuffle_array(array) {
-				for (let i = array.length - 1; i > 0; i--) {
-					const j = Math.floor(Math.random() * (i + 1));
-					[array[i], array[j]] = [array[j], array[i]]; // Swap elements
-				}
+		function shuffle_array(array) {
+			for (let i = array.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[array[i], array[j]] = [array[j], array[i]]; // Swap elements
 			}
-
-			const active_trainers = [...trainers]; // Copy of trainers array
-
-			shuffle_array(active_trainers);
-			const tournament = new Tournament(active_trainers); // assuming trainers is an array of trainer objects
-			tournament.start_tournament(); // This will handle the tournament based on trainer count
-			break;
 		}
+
+		const active_trainers = [...trainers]; // Copy of trainers array
+
+		shuffle_array(active_trainers);
+		const tournament = new Tournament(active_trainers); // assuming trainers is an array of trainer objects
+		tournament.start_tournament(); // This will handle the tournament based on trainer count
+		break;
 	} else if (input === "n" || input === "N") {
 		console.log("Okay.");
 		break;
@@ -26,6 +24,17 @@ do {
 		alert("Invalid input! Please enter Y or N.");
 	}
 } while (true);
+
+let restart = prompt("Do you want to start a new tournament? [Y/N]");
+if (input === "y" || input === "Y") {
+	location.reload();
+} else if (input === "n" || input === "N") {
+	console.log("Thanks for playing!");
+} else if (input === null || input.trim() === "") {
+	alert("Input cannot be empty. Please try again!");
+} else {
+	alert("Invalid input! Please enter Y or N.");
+}
 
 // do {
 // 	var input = prompt("Do you want to start the battle? [Y/N]");
