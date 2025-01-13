@@ -24,6 +24,7 @@ const pokemon_array = [
 	"Magikarp",
 	"Fearow",
 	"Geodude",
+	"Tyranitar",
 ];
 
 function shuffle_arrays(array) {
@@ -130,17 +131,19 @@ for (let index = 0; index < trainer_count * pokemon_count; index++) {
 			1,
 			100 + Math.floor(Math.random() * 20)
 		);
-	} else if (["Electrode", "Jolteon"].includes(pokemon_array[index])) {
+	} else if (
+		["Pikachu", "Electrode", "Jolteon"].includes(pokemon_array[index])
+	) {
 		pokemon = new ElectricPokemon(
 			pokemon_array[index],
 			1,
-			110 + Math.floor(Math.random() * 10)
+			120 + Math.floor(Math.random() * 10)
 		);
 	} else if (["Onix", "Geodude", "Tyranitar"].includes(pokemon_array[index])) {
 		pokemon = new RockPokemon(
 			pokemon_array[index],
 			1,
-			120 + Math.floor(Math.random() * 20)
+			115 + Math.floor(Math.random() * 20)
 		);
 	} else if (["Alakazam", "Mewtwo"].includes(pokemon_array[index])) {
 		//"Abra"

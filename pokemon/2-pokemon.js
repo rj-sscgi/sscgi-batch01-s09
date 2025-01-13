@@ -4,6 +4,7 @@ class Pokemon {
 		this.type = type;
 		this.level = level;
 		this.hp = hp;
+		this.max_hp = hp;
 		switch (type) {
 			case "Electric":
 			case "Fire":

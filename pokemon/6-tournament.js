@@ -8,6 +8,7 @@ class Tournament {
 
 		const trainer_count = this.players.length;
 
+		// 2 trainers battle
 		if (trainer_count === 2) {
 			// Single game battle
 			let results = {
@@ -28,6 +29,12 @@ class Tournament {
 			}
 
 			console.log("\n🏆 Final Results:");
+			this.players.forEach((trainer) => {
+				console.log(`\nTrainer ${trainer.name}'s Pokemon after battle:`);
+				trainer.summarize();
+			});
+
+			console.log(" ");
 			for (const trainer in results) {
 				console.log(`Trainer ${trainer}: ${results[trainer]} win`);
 			}
@@ -37,7 +44,10 @@ class Tournament {
 			} else {
 				console.log("\n🏆 The tournament ended in a draw!");
 			}
-		} else if (trainer_count === 3) {
+		}
+
+		// 3 trainers battle
+		else if (trainer_count === 3) {
 			// Round-robin tournament
 			console.log("⚔️ Round-Robin Tournament ⚔️");
 
@@ -65,11 +75,21 @@ class Tournament {
 				console.log(`Trainer ${trainer}: ${results[trainer]} wins`);
 			}
 
+			this.players.forEach((trainer) => {
+				console.log(`\nTrainer ${trainer.name}'s Pokemon after battle:`);
+				trainer.summarize();
+			});
+
+			console.log(" ");
+
 			const champion = Object.keys(results).reduce((a, b) =>
 				results[a] > results[b] ? a : b
 			);
 			console.log(`\n🏆 The champion is Trainer ${champion}!`);
-		} else if (trainer_count === 4) {
+		}
+
+		// 4 trainers battle
+		else if (trainer_count === 4) {
 			// Double-elimination bracket
 			console.log("⚔️ Double Elimination Tournament ⚔️");
 
@@ -137,11 +157,21 @@ class Tournament {
 			// Final winner
 			const champion = winners_bracket[0];
 			console.log("\n🏆 Tournament Results:");
+			this.players.forEach((trainer) => {
+				console.log(`\nTrainer ${trainer.name}'s Pokemon after battle:`);
+				trainer.summarize();
+			});
+
+			console.log(" ");
+
 			for (const trainer in results) {
 				console.log(`Trainer ${trainer}: ${results[trainer]} wins`);
 			}
 			console.log(`\n🏆 The champion is Trainer ${champion.name}!`);
-		} else if (trainer_count === 5) {
+		}
+
+		// 5 trainers battle
+		else if (trainer_count === 5) {
 			// Double-elimination bracket
 			console.log("⚔️ Double Elimination Tournament ⚔️");
 
@@ -221,6 +251,13 @@ class Tournament {
 				}
 
 				console.log("\n🏆 Round-Robin Tournament Results:");
+				this.players.forEach((trainer) => {
+					console.log(`\nTrainer ${trainer.name}'s Pokemon after battle:`);
+					trainer.summarize();
+				});
+
+				console.log(" ");
+
 				for (const trainer in results) {
 					console.log(`Trainer ${trainer}: ${results[trainer]} wins`);
 				}
