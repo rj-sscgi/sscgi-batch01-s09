@@ -197,18 +197,10 @@ for (let index = 0; index < trainer_count * pokemon_count; index++) {
 	} else if (index >= pokemon_count * 2 && index < pokemon_count * 3) {
 		// misty pokemon: 9, 10, 11, 12, ...
 		misty.assign_pokemon(pokemon);
-	} else if (
-		index >= pokemon_count * 3 &&
-		index < pokemon_count * 4 &&
-		trainer_count >= 4
-	) {
+	} else if (index >= pokemon_count * 3 && index < pokemon_count * 4) {
 		// leon pokemon: 14, 15, 16, 17, ... (only for 4 or more trainers)
 		leon.assign_pokemon(pokemon);
-	} else if (
-		index >= pokemon_count * 4 &&
-		index < pokemon_count * 5 &&
-		trainer_count === 5
-	) {
+	} else if (index >= pokemon_count * 4 && index < pokemon_count * 5) {
 		// lance pokemon: 19, 20, 21, 22, ... (only for 5 trainers)
 		lance.assign_pokemon(pokemon);
 	}
@@ -220,7 +212,7 @@ ash.show_pokemon();
 console.log(" ");
 brock.show_pokemon();
 
-if (trainer_count === 5) {
+if (trainer_count == 5) {
 	// show all for 5 trainers
 	trainers.push(misty);
 	trainers.push(leon);
@@ -232,7 +224,7 @@ if (trainer_count === 5) {
 	leon.show_pokemon();
 	console.log(" ");
 	lance.show_pokemon();
-} else if (trainer_count === 4) {
+} else if (trainer_count == 4) {
 	// show misty and leon for 4 trainers
 	trainers.push(misty);
 	trainers.push(leon);
