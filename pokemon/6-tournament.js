@@ -25,13 +25,12 @@ class Tournament {
 				console.log("🚫 The battle ended in a draw.");
 			}
 
-			console.log("\n🏆 Final Results:");
 			this.players.forEach((trainer) => {
 				console.log(`\nTrainer ${trainer.name}'s Pokemon after battle:`);
 				trainer.summarize();
 			});
 
-			console.log(" ");
+			console.log("\n🏆 Final Results:");
 			for (const trainer in results) {
 				console.log(`Trainer ${trainer}: ${results[trainer]} win`);
 			}
@@ -123,9 +122,12 @@ class Tournament {
 							? winners_bracket[i + 1]
 							: winners_bracket[i];
 
+					console.log(
+						`🎉 Trainer ${winner.name} wins and will move to the next round!`
+					);
 					loser.losses++;
 
-					// Eliminate players with 2 losses
+					// eliminate players with 2 losses
 					if (loser.losses === 2) {
 						console.log(`❌ Trainer ${loser.name} has been eliminated!`);
 						eliminated_players.push(loser);
@@ -147,12 +149,12 @@ class Tournament {
 
 				// Losers' bracket battles
 				if (losers_bracket.length > 0) {
-					console.log("\n⚔️ Battles in the losers' bracket!");
+					console.log("\n⚔️ Battles in the losers' bracket!\n");
 					const updated_losers = [];
 
 					for (let i = 0; i < losers_bracket.length; i += 2) {
 						if (i + 1 >= losers_bracket.length) {
-							// Odd number of players, auto-advance
+							// odd number of players, auto-advance
 							console.log(
 								`🔄 Trainer ${losers_bracket[i].name} auto-advances in the losers' bracket.`
 							);
@@ -175,20 +177,22 @@ class Tournament {
 							eliminated_players.push(loser);
 						} else {
 							console.log(
-								`🔄 Trainer ${loser.name} continues in the losers' bracket.`
+								`🔄 Trainer ${loser.name} wins the match in the losers' bracket.`
 							);
 							updated_losers.push(loser);
 						}
 
 						// Advance winner
 						updated_losers.push(winner);
-						console.log(
-							`🏆 Trainer ${winner.name} wins the loser's bracket tournament!`
-						);
+						console.log(`🏆 Trainer ${winner.name} wins the match!`);
 
 						// Track results
 						results[winner.name]++;
 					}
+
+					console.log(
+						`\n🏆 Trainer ${updated_losers[0].name} wins the loser's bracket tournament!`
+					);
 
 					losers_bracket = updated_losers.concat(next_round_losers);
 				} else {
@@ -199,7 +203,6 @@ class Tournament {
 			// Final battle between the winners of both brackets
 			if (winners_bracket.length === 1 && losers_bracket.length === 1) {
 				console.log(`
-					
 
 			🔥 ******************** FINAL BATTLE ******************** 🔥
 			🔥 ******** Winner's Bracket vs. Loser's Bracket ******** 🔥
@@ -213,9 +216,7 @@ class Tournament {
 				results[final_winner.name]++;
 			}
 
-			// final winner
-			console.log("\n🏆 ******** Tournament Results ******** 🏆");
-
+			// final results
 			this.players.forEach((trainer) => {
 				// shows a summary using the summarize() function
 				console.log(`Trainer ${trainer.name}'s Pokemon after battle:`);
@@ -223,6 +224,7 @@ class Tournament {
 				console.log(" ");
 			});
 
+			console.log("\n🏆 ******** Tournament Results ******** 🏆");
 			for (const trainer in results) {
 				console.log(`Trainer ${trainer}: ${results[trainer]} wins`);
 			}
@@ -286,41 +288,26 @@ class Tournament {
 						next_round_losers.push(loser);
 					}
 
-					// Advance winner
+					console.log(
+						`🏆 Trainer ${winner.name} wins the battle and will advance to the round-robin tournament!`
+					);
+
+					// advance winner
 					next_round_winners.push(winner);
 
-					// Track results
+					// track results
 					results[winner.name]++;
 				}
 
+				// add the winners and losers to the alternative array
 				winners_bracket = next_round_winners;
 				losers_bracket = next_round_losers;
-
-				console.log(
-					"Updated Winners Bracket:",
-					winners_bracket.map((p) => p.name)
-				);
-				console.log("eeee nxt win " + next_round_winners.length);
-				console.log("yyyy nxt lose " + next_round_losers.length);
-				console.log("aaaaa winner bracket" + winners_bracket);
-				console.log("ssssss loser brac" + losers_bracket);
-				console.log("2222 elimn" + eliminated_players);
 
 				// Losers' bracket battles
 				if (losers_bracket.length > 1) {
 					console.log("\n⚔️ Battles in the losers' bracket!");
-					// const updated_losers = [];
 
 					for (let i = 0; i < losers_bracket.length; i += 2) {
-						if (i + 1 >= losers_bracket.length) {
-							// Odd number of players, auto-advance
-							console.log(
-								`🔄 Trainer ${losers_bracket[i].name} auto-advances in the losers' bracket.`
-							);
-							updated_losers.push(losers_bracket[i]);
-							break;
-						}
-
 						const battle = new Battle(losers_bracket[i], losers_bracket[i + 1]);
 						const winner = battle.start_battle();
 						const loser =
@@ -330,85 +317,51 @@ class Tournament {
 
 						loser.losses++;
 
-						// Eliminate players with 2 losses
+						// eliminate players with 2 losses
 						if (loser.losses === 2) {
 							console.log(`❌ Trainer ${loser.name} has been eliminated!`);
 							eliminated_players.push(loser);
 						}
-						// else {
-						// 	console.log(
-						// 		`🔄 Trainer ${loser.name} continues in the losers' bracket.`
-						// 	);
-
-						// }
-						// updated_losers.push(loser);
-						// Advance winner
 
 						console.log(
-							`🏆 Trainer ${winner.name} wins the loser's bracket tournament!`
+							`🏆 Trainer ${winner.name} wins the loser's bracket tournament and will advance to the round-robin tournament!`
 						);
 						additional_player.push(winner);
 
-						// Track results
+						// track results
 						results[winner.name]++;
 					}
 				}
 			}
 
-			// fight the advanced player and a random winner
+			// battle: advanced player vs. a random winner
 			let random_player;
+			// ensures that random_player is not the advanced
 			do {
 				const random_index = Math.floor(Math.random() * winners_bracket.length);
 				random_player = winners_bracket[random_index];
-			} while (random_player === advanced_player); // Ensure random_player is not the advanced one
+			} while (random_player === advanced_player);
 
 			console.log("\n🔥 Winner's Bracket Match 🔥");
 			console.log(
-				`🏅 Advanced Trainer ${advanced_player.name} will battle Trainer ${random_player.name}!`
+				`🏅 'Advanced' Trainer ${advanced_player.name} will battle Trainer ${random_player.name}!`
 			);
 
 			const ad_battle = new Battle(advanced_player, random_player);
 			const ad_winner = ad_battle.start_battle();
 
-			console.log(`🎉 Trainer ${ad_winner.name} moves to the winner bracket!`);
+			console.log(
+				`🎉 Trainer ${ad_winner.name} wins and will move to the round-robin tournament!`
+			);
 			results[ad_winner.name]++;
+
 			additional_player.push(ad_winner);
 			additional_player.push(losers_bracket[0]);
 			let final_players = additional_player;
 
-			console.log(
-				"add",
-				additional_player.map((p) => p.name)
-			);
-
-			console.log(
-				"win",
-				winners_bracket.map((p) => p.name)
-			);
-
-			console.log(
-				"lose",
-				losers_bracket.map((p) => p.name)
-			);
-
-			// Final battle between the winners of both brackets
-			// if (winners_bracket.length === 1 && losers_bracket.length === 1) {
-			// 	console.log(`
-
-			// 🔥 ******** Winner's Bracket vs. Loser's Bracket ******** 🔥
-			// 			`);
-
-			// 	const final_battle = new Battle(winners_bracket[0], losers_bracket[0]);
-			// 	const final_winner = final_battle.start_battle();
-			// 	console.log(`\n🏆 Trainer ${final_winner.name} wins the tournament!`);
-
-			// 	// Track the final results
-			// 	results[final_winner.name]++;
-			// }
-
-			// transition to round-robin tournament if there are 3 or fewer players left
+			// transition to round-robin tournament if there are 3 players left
 			if (final_players.length == 3) {
-				console.log("\n⚔️ Round-Robin Tournament for the Final Players ⚔️");
+				console.log("\n🔥⚔️ Round-Robin Tournament for the Final Players ⚔️🔥");
 
 				const results = {};
 				winners_bracket.forEach((trainer) => (results[trainer.name] = 0));
@@ -422,9 +375,7 @@ class Tournament {
 				}
 			}
 
-			// final winner
-			console.log("\n🏆 ******** Round-Robin Tournament Results ******** 🏆");
-
+			// final results
 			this.players.forEach((trainer) => {
 				// shows a summary using the summarize() function
 				console.log(`Trainer ${trainer.name}'s Pokemon after battle:`);
@@ -432,6 +383,7 @@ class Tournament {
 				console.log(" ");
 			});
 
+			console.log("\n🏆 ******** Round-Robin Tournament Results ******** 🏆");
 			for (const trainer in results) {
 				console.log(`Trainer ${trainer}: ${results[trainer]} wins`);
 			}

@@ -2,11 +2,11 @@
 do {
 	var input = prompt("Do you want to start the battle? [Y/N]");
 	if (input === "y" || input === "Y") {
-		// create a new Tournament with the trainers
+		// shuffle the trainers
 		function shuffle_array(array) {
 			for (let i = array.length - 1; i > 0; i--) {
 				const j = Math.floor(Math.random() * (i + 1));
-				[array[i], array[j]] = [array[j], array[i]]; // Swap elements
+				[array[i], array[j]] = [array[j], array[i]]; // swap elements
 			}
 		}
 

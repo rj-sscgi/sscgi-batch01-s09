@@ -9,7 +9,7 @@ class Trainer {
 	assign_pokemon(assigned_pokemon) {
 		this.pokemon_list.push(assigned_pokemon);
 		console.log(
-			`${assigned_pokemon.name} has been assigned to Trainer ${this.name}.`
+			`🐾 Trainer ${this.name}'s new Pokemon: ${assigned_pokemon.name}`
 		);
 	}
 	// return this.pokemon_list[index];
